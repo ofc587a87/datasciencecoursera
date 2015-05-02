@@ -1,31 +1,19 @@
 # Exercise 2
+
 source("exercise1.R")
 
 best <- function(state, outcome) {
     
     hospitalName <- NULL;
+    
     ##read outcome data
     data <- readOutcome();
+    
+    ## check that stats and outcome are valid
+    checkSanity(data, state, outcome);
 
     # filter data with state
     filterData=data[data$State == state, ];
-    
-    ## check that stats and outcome are valid
-    if(nrow(filterData) == 0) {
-        stop ("invalid state");
-    }
-
-    # replace column names for expected (and simple) outcomes
-    tmpNames <- names(filterData);
-    tmpNames <- replace(tmpNames, tmpNames=="Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack", "heart attack");
-    tmpNames <- replace(tmpNames, tmpNames=="Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure", "heart failure");
-    tmpNames <- replace(tmpNames, tmpNames=="Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia", "pneumonia");
-    names(filterData) <- tmpNames;
-
-
-    if(!outcome %in% names(filterData)) {
-        stop("invalid outcome");
-    }
     
     # convert to numeric, supress warnings about NA for "Not Available"
     suppressWarnings(filterData[[outcome]] <- as.numeric(filterData[[outcome]]));

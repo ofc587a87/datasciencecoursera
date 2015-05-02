@@ -3,12 +3,34 @@
 readOutcome <- function() {
     # read data of CSV forcing every variable as character
     # use <<- to store it as a global variable, outside the function environment
-    outcome <- read.csv("outcome-of-care-measures.csv", colClasses = "character");
+    data <- read.csv("outcome-of-care-measures.csv", colClasses = "character");
 
     # debug message
     # message(paste("Readed", nrow(outcome), " obs. with", ncol(outcome), "variables"));
     
-    outcome;
+    # replace column names for expected (and simple) outcomes
+    tmpNames <- names(data);
+    tmpNames <- replace(tmpNames, tmpNames=="Hospital.30.Day.Death..Mortality..Rates.from.Heart.Attack", "heart attack");
+    tmpNames <- replace(tmpNames, tmpNames=="Hospital.30.Day.Death..Mortality..Rates.from.Heart.Failure", "heart failure");
+    tmpNames <- replace(tmpNames, tmpNames=="Hospital.30.Day.Death..Mortality..Rates.from.Pneumonia", "pneumonia");
+    names(data) <- tmpNames;
+    
+    data;
+}
+
+checkSanity <- function(origData, state, outcome)
+{
+    filterData=origData[origData$State == state, ];
+    
+    ## check that stats and outcome are valid
+    if(nrow(filterData) == 0) {
+        stop ("invalid state");
+    }
+    
+    
+    if(!outcome %in% names(filterData)) {
+        stop("invalid outcome");
+    } 
 }
 
 # plot histogram of las 30 days death rates from heart attach
