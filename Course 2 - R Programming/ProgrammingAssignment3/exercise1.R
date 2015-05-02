@@ -3,10 +3,12 @@
 readOutcome <- function() {
     # read data of CSV forcing every variable as character
     # use <<- to store it as a global variable, outside the function environment
-    outcome <<- read.csv("outcome-of-care-measures.csv", colClasses = "character");
+    outcome <- read.csv("outcome-of-care-measures.csv", colClasses = "character");
 
     # debug message
-    message(paste("Readed", nrow(outcome), "rows of", ncol(outcome), "variables"));
+    # message(paste("Readed", nrow(outcome), " obs. with", ncol(outcome), "variables"));
+    
+    outcome;
 }
 
 # plot histogram of las 30 days death rates from heart attach
