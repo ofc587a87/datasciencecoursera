@@ -18,9 +18,12 @@ readOutcome <- function() {
     data;
 }
 
-checkSanity <- function(origData, state, outcome)
+checkSanity <- function(origData, state=NULL, outcome)
 {
-    filterData=origData[origData$State == state, ];
+    filterData <- origData;
+    if(!is.null(state)) {
+        filterData=origData[origData$State == state, ];
+    }
     
     ## check that stats and outcome are valid
     if(nrow(filterData) == 0) {
