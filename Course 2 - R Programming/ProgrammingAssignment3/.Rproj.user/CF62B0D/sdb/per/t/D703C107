@@ -1,0 +1,17 @@
+{
+    "contents" : "# Exercise 3: \"rankhospital\"\n\nsource(\"exercise1.R\");\n\nrankhospital <- function(state, outcome, num = \"best\") {\n    \n    hospitalName <- NULL;\n    \n    ##read outcome data\n    data <- readOutcome();\n    \n    ## check that stats and outcome are valid\n    checkSanity(data, state, outcome);\n    \n    # check num param\n    rankIndex <- NA;\n    if(num == \"best\") { rankIndex <- 1; }\n    else if(num ==\"worst\") { rankIndex <- -1; } else {\n        #supress warnings. If it fails, it will be NA, that will be checked later\n        suppressWarnings(rankIndex <- as.integer(num));\n    }\n    \n    # if it's invalid, return NA;\n    if(is.na(rankIndex)) {\n        return(NA);\n    }\n    \n    # filter data with state and \"Not Available\" outcome\n    filterData <- data[data$State == state, ];\n    filterData <- filterData[filterData[[outcome]] != \"Not Available\", ];\n    \n    # convert to numeric, there are not NA as \"Not Available\" are filtered out\n    filterData[[outcome]] <- as.numeric(filterData[[outcome]]);\n    \n    #create data frame with data (without rank)\n    unrankedData=data.frame(Hospital.Name = filterData$Hospital.Name, Rate = filterData[[outcome]]);\n    \n    #create ranked data sorting\n    rankedData = cbind(unrankedData[order(unrankedData$Rate, unrankedData$Hospital.Name),], Rank=1:nrow(unrankedData));\n    \n    #adjust worst index\n    if(rankIndex == -1) { rankIndex <- nrow(rankedData); }\n        \n    # returns a character vector with Hospital name in that state with the given rank\n    # if there is no Hospital at given rank, return NA\n    if(nrow(rankedData) < rankIndex) {\n        return(NA);\n    } else {\n        c(as.character(rankedData[rankedData$Rank == rankIndex, ]$Hospital.Name));\n    }\n}",
+    "created" : 1430558516582.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "1940647652",
+    "id" : "D703C107",
+    "lastKnownWriteTime" : 1430562341,
+    "path" : "C:/Users/Peich/git/datasciencecoursera/Course 2 - R Programming/ProgrammingAssignment3/rankhospital.R",
+    "project_path" : "rankhospital.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : true,
+    "type" : "r_source"
+}

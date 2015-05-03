@@ -1,0 +1,17 @@
+{
+    "contents" : "# Exercise 4: rankall\n\nsource(\"exercise1.R\");\n\nfindHospital <- function (stateList, rankIndex) {\n    state=names(stateList)[1];\n    sublist=stateList[[state]];\n    numRows <- nrow(sublist);\n    sublist$rank <- 1:numRows;\n    \n    subIndex <- rankIndex;\n    if(subIndex == -1) { subIndex <- numRows; }\n    \n    #find hospital name\n    hospitalName <- NA;\n    if(!is.na(subIndex) && subIndex <= numRows) {\n        hospitalName <- as.character(sublist[sublist$rank == subIndex, ]$hospital);\n    }\n    \n    # creates result\n    result <- cbind(hospital=hospitalName, state=state);\n    result;\n}\n\nrankall <- function(outcome, num=\"best\")\n{\n    ## read outcome data\n    result <- NULL;\n    \n    ##read outcome data\n    data <- readOutcome();\n    \n    ## check outcome is valid\n    checkSanity(data, outcome=outcome);\n    \n    # check num param\n    rankIndex <- NA;\n    if(num == \"best\") { rankIndex <- 1; }\n    else if(num ==\"worst\") { rankIndex <- -1; } else {\n        #supress warnings. If it fails, it will be NA, that will be checked later\n        suppressWarnings(rankIndex <- as.integer(num));\n    }\n    \n    # filter data with state and \"Not Available\" outcome\n    filterData <- data[data[[outcome]] != \"Not Available\", ];\n    \n    # convert to numeric, there are not NA as \"Not Available\" are filtered out\n    filterData[[outcome]] <- as.numeric(filterData[[outcome]]);\n    \n    # global ordering\n    filterData <- filterData[order(filterData[[outcome]], filterData$Hospital.Name),];\n    \n    #create list split by state\n    rankedData <- split(data.frame(hospital=filterData$Hospital.Name, outcome=filterData[[outcome]]), filterData$State);\n        \n    #add rank by state and filter, creating dataframe. pas rankIndex ad additional parameter\n    resultList <- sapply(split(rankedData, names(rankedData)), findHospital, rankIndex);\n    \n    result <- data.frame(hospital=resultList[1,], state=resultList[2,]);\n    \n    ##return data fram with the hospital name and the abreviated state name\n    result\n}",
+    "created" : 1430562565666.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2517692619",
+    "id" : "42277ADF",
+    "lastKnownWriteTime" : 1430569562,
+    "path" : "C:/Users/Peich/git/datasciencecoursera/Course 2 - R Programming/ProgrammingAssignment3/rankall.R",
+    "project_path" : "rankall.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : true,
+    "type" : "r_source"
+}

@@ -1,0 +1,16 @@
+{
+    "contents" : "# Exercise 2\n\nsource(\"exercise1.R\")\n\nbest <- function(state, outcome) {\n    \n    hospitalName <- NULL;\n    \n    ##read outcome data\n    data <- readOutcome();\n    \n    ## check that stats and outcome are valid\n    checkSanity(data, state, outcome);\n\n    # filter data with state\n    filterData=data[data$State == state, ];\n    \n    # convert to numeric, supress warnings about NA for \"Not Available\"\n    suppressWarnings(filterData[[outcome]] <- as.numeric(filterData[[outcome]]));\n    \n    \n    # get min value (there are not NAs)\n    minValue <- min(filterData[[outcome]], na.rm = TRUE);\n    \n    # get hospitals with min value\n    hospitals <- filterData[filterData[[outcome]] == minValue, ]$Hospital.Name;\n    hospitals <- hospitals[!is.na(hospitals)];\n    \n    # if there are only one result, it's a character, not a vector\n    if(is.character(hospitals)) {\n        hospitalName <- hospitals;\n    } else {\n        # if it's a vector, sort and return the first one as result\n        hospitals <- sort(hospitals)\n        hospitalName <- c(hospitals[0]);\n    }\n    \n    ## return hospital name in that state with lowest 30-day death rate\n    hospitalName;\n}",
+    "created" : 1430558731492.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3369440291",
+    "id" : "E93722A5",
+    "lastKnownWriteTime" : 1430559882,
+    "path" : "C:/Users/Peich/git/datasciencecoursera/Course 2 - R Programming/ProgrammingAssignment3/best.R",
+    "project_path" : "best.R",
+    "properties" : {
+    },
+    "source_on_save" : false,
+    "type" : "r_source"
+}
