@@ -1,5 +1,6 @@
 
 library("xlsx")
+library("XML")
 
 question1 <- function() {
     # reads file
@@ -16,5 +17,20 @@ question3 <- function() {
     
     dat <- data[, 7:15];
     
-    sum(dat$Zip*dat$Ext,na.rm=T);
+    message(paste("Result: ", sum(dat$Zip*dat$Ext,na.rm=T)))
+}
+
+question4 <- function()
+{
+    #reads data
+    data <- xmlParse("getdata-data-restaurants.xml");
+    
+    root <- xmlRoot(data);
+    
+    #extract zipcodes
+    zipCodes <- xpathSApply(root, "//zipcode", xmlValue);
+
+    # How many restaurants have zipcode 21231?
+    message(paste("Num restaurants with zipcode 21231:", sum(zipCodes == "21231")));
+
 }
