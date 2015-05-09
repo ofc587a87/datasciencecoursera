@@ -1,6 +1,7 @@
 
 library("xlsx")
 library("XML")
+library("data.table")
 
 question1 <- function() {
     # reads file
@@ -32,5 +33,4 @@ question4 <- function()
 
     # How many restaurants have zipcode 21231?
     message(paste("Num restaurants with zipcode 21231:", sum(zipCodes == "21231")));
-
 }
