@@ -1,12 +1,12 @@
 {
-    "contents" : "\nreadData <- function() {\n    # reads file\n    read.csv(file = \"getdata-data-ss06hid.csv\")\n}\n\nquestion1 <- function() {\n    \n    data <- readData()\n    \n    # How many properties are worth $1,000,000 or more?\n    message(paste(\"Num properties are worth $1,000,000 or more:\", nrow(data[!is.na(data$VAL)& data$VAL == 24 ,])))\n}",
+    "contents" : "\nlibrary(\"xlsx\")\n\nquestion1 <- function() {\n    # reads file\n    data <- read.csv(file = \"getdata-data-ss06hid.csv\")\n    \n    # How many properties are worth $1,000,000 or more?\n    message(paste(\"Num properties are worth $1,000,000 or more:\", nrow(data[!is.na(data$VAL)& data$VAL == 24 ,])))\n}\n\nquestion3 <- function() {\n    # reads file, rows 18-23 and columns 7-15\n    data <- read.xlsx(\"getdata-data-DATA.gov_NGAP.xlsx\", sheetIndex = 1, header=TRUE,\n                      startRow = 18, endRow=23);\n    \n    dat <- data[, 7:15];\n    \n    sum(dat$Zip*dat$Ext,na.rm=T);\n}",
     "created" : 1431201400169.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "1553761307",
+    "hash" : "620840460",
     "id" : "21DBC778",
-    "lastKnownWriteTime" : 1431202596,
+    "lastKnownWriteTime" : 1431204100,
     "path" : "C:/Users/Peich/git/datasciencecoursera/Course 3 - Getting and cleaning data/Quiz 1/questionFuntions.R",
     "project_path" : "questionFuntions.R",
     "properties" : {
