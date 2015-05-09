@@ -1,0 +1,17 @@
+{
+    "contents" : "question1 <- function() {\n    \n    # reads file\n    data <- read.csv(file = \"getdata-data-ss06hid.csv\")\n    \n    # How many properties are worth $1,000,000 or more?\n    message(paste(\"Num properties are worth $1,000,000 or more:\", nrow(data[!is.na(data$VAL)& data$VAL == 24 ,])))\n}",
+    "created" : 1431201400169.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2702395361",
+    "id" : "21DBC778",
+    "lastKnownWriteTime" : 1431202282,
+    "path" : "C:/Users/Peich/git/datasciencecoursera/Course 3 - Getting and cleaning data/Quiz 1/questionFuntions.R",
+    "project_path" : "questionFuntions.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "source_on_save" : true,
+    "type" : "r_source"
+}
