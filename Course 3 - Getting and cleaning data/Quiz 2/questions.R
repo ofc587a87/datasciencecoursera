@@ -46,3 +46,19 @@ question2 <- function()
         str(sqldf(querys[i]));
     }
 }
+
+question3 <- function()
+{
+    querys = c("select distinct AGEP from acs",
+               "select unique * from acs",
+               "select unique AGEP from acs",
+               "select AGEP where unique from acs");
+    
+    acs=read.csv("getdata-data-ss06pid.csv", header = TRUE);
+    
+    for(i in 1:length(querys)) {
+        message(paste("Query", i, "->", querys[i], ":"));
+        try(str(sqldf(querys[i])), silent = FALSE);
+    }
+}
+
