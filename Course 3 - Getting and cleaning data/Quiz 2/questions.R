@@ -77,3 +77,10 @@ question4 <- function() {
     message(paste("Linea 100:", nchar(htmlContent[100])));
 }
 
+question5 <- function() {
+    data <- read.fwf("getdata-wksst8110.for", skip = 4, header = F,
+                     widths = c(10, 9, 4, 9, 4, 9, 4, 9, 4));
+    
+    sum(data[4], na.rm = TRUE);
+}
+
