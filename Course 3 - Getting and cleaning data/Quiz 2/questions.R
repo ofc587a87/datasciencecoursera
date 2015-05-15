@@ -1,6 +1,7 @@
 library("httr");
 library("jsonlite");
 library("sqldf");
+library("XML");
 
 question1 <- function() {
     
@@ -60,5 +61,19 @@ question3 <- function()
         message(paste("Query", i, "->", querys[i], ":"));
         try(str(sqldf(querys[i])), silent = FALSE);
     }
+}
+
+question4 <- function() {
+    
+    #leemos el HTML
+    con <- url("http://biostat.jhsph.edu/~jleek/contact.html");
+    htmlContent <- readLines(con);
+    close(con);
+    
+    message(paste("Tamaño del HTML:", length(htmlContent)));
+    message(paste("Linea 10:", nchar(htmlContent[10])));
+    message(paste("Linea 20:", nchar(htmlContent[20])));
+    message(paste("Linea 30:", nchar(htmlContent[30])));
+    message(paste("Linea 100:", nchar(htmlContent[100])));
 }
 
