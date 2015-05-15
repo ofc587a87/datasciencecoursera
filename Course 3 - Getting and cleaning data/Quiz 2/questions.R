@@ -1,6 +1,6 @@
 library("httr");
-library("utils");
 library("jsonlite");
+library("sqldf");
 
 question1 <- function() {
     
@@ -30,4 +30,19 @@ question1 <- function() {
     
     mtxData[c(2,45)]
     #message(paste("Resository created at ", mtxData[mtxData$name == "datasharing"]));
+}
+
+question2 <- function()
+{
+    querys = c("select pwgtp1 from acs",
+               "select pwgtp1 from acs where AGEP < 50",
+               "select * from acs where AGEP < 50 and pwgtp1",
+               "select * from acs where AGEP < 50");
+    
+    acs=read.csv("getdata-data-ss06pid.csv", header = TRUE);
+    
+    for(i in 1:length(querys)) {
+        message(paste("Query", i, "->", querys[i], ":"));
+        str(sqldf(querys[i]));
+    }
 }
