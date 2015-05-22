@@ -1,3 +1,5 @@
+library("jpeg")
+
 
 loadData <- function()
 {
@@ -18,4 +20,11 @@ question1 <- function()
     
     # WQe only neede the rows IDs, do just return the first 3 columns (avoid screen scroll)
     head(agricultureLogical[,1:3], 3)
+}
+
+question2 <- function()
+{
+    img <- readJPEG("getdata-jeff.jpg", native=TRUE);
+    
+    quantile(img, probs = c(0.3, 0.8));
 }
