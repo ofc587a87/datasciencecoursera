@@ -54,4 +54,14 @@ question3 <- function()
     
     
     message(paste("Country #13: ", mergedData[13, "Name"]));
+    
+    q3Data <<- mergedData;
+}
+
+question4 <- function()
+{
+    groups <- group_by(q3Data, Income.Group)
+    
+    #What is the average GDP ranking
+    summarize(groups, average=mean(Ranking));
 }
