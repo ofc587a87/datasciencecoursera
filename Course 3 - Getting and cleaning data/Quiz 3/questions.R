@@ -1,4 +1,5 @@
 library("jpeg")
+library("reshape2")
 library("dplyr")
 
 question1 <- function()
@@ -64,4 +65,22 @@ question4 <- function()
     
     #What is the average GDP ranking
     summarize(groups, average=mean(Ranking));
+}
+
+question5 <- function()
+{
+    # Cut the GDP ranking into 5 separate quantile groups. Make a table versus
+    # Income.Group. How many countries are Lower middle income but among the 38
+    # nations with highest GDP?
+    sortedGDP <- arrange(q3Data, desc(GDP));
+    limitQuantile <- sortedGDP[38, "GDP"]
+    message(paste("limitQuantile:", limitQuantile));
+    
+    rankedData <- (q3Data %>% mutate (HighGDP = GDP >= limitQuantile));
+    #rankedData <-rankedData[rankedData$HighGDP == TRUE, c("Income.Group", "Ranking", "GDP", "HighGDP")];
+    
+    print(sum(rankedData$HighGDP));
+    
+    groups <- group_by(rankedData, Income.Group);
+    summarize(groups, total=sum(HighGDP));
 }
