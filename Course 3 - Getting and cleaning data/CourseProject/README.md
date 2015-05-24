@@ -1,13 +1,13 @@
 ---
   Author: David Luna
 ---
-# Data Sciente Specialization
+# Data Science Specialization
 ## Course 3 - Getting and cleaning data
-### Introduction: Course Project
+### Course Project
 
-This course project belongs to the 3er course  of the Data Science Speclization track from Coursera.
+This course project belongs to the 3er course of the Data Science Specialization track from Coursera.
 
-This projects ask to get some raw data, read and transformt itt, and return a tidy data set.
+This projects ask to read some raw data from a provided data set, transform it, and return a tidy data set.
 
 It follows these instructions:
 
@@ -25,16 +25,16 @@ The code is located in the file **run_analysis.R** as required.
 
 The code contains several methods:
 
-* **step1()**: Merges the training and the test sets to create one data set.
+* **step1()**: Merges the training and the test data sets into one data set, with subject and activity data.
     + Does not require parameters
     + Returns the resulting dataset
-* **step2(data)**: Filter out variables from the dataset that are not related to mean or standard deviation, excepting activity and subject variables.
+* **step2(data)**: Filter out variables from the dataset that are not related to mean or standard deviation, excepting activity and subject variables. It's objtaining from the file *activity_labels.txt*, if the variable name contains the text 'mean(', 'meanFreq(' or 'std('.
     + Requires the data set obtained from step1
     + Returns the filtered data set
 * **step3(data)**: Replace the the Activity variable, containing an activity ID, with its corresponding name, provided in the file *activity_labels.txt*. 
     + Requires the data set obtained from step2
     + Returns the dataset with the Activity column mutated.
-* **step4(data)**: Assign variable names to each column. The name is extrated from the features names provided with the data package (*features.txt*), transformed into an usable variable name with *make.name* function.
+* **step4(data)**: Assign variable names to each column. The name is extrated from the features names provided with the data package (*features.txt*), transformed into a valid variable name with the *make.name* function.
     + Requires the data set obtained from step3
     + Returns the dataset with the associated column names.
 * **step5(data)**: creates the final tidy data set required, calculating the mean of each column, grouped by Activity and Subject.
@@ -42,10 +42,10 @@ The code contains several methods:
     + Returns the tidy dataset.
 * **main(writeFile=FALSE)**: Quick test method, executes automatically the secuence of steps.
     + there is an optional parameter:
-        + writeFile: Indicates if a file should be writen with the result. If TRUE, writes a file named *tidyDataResult.txt* using the function write.table (uploaded to coursera course evaluation). Defaults to FALSE.
+        + writeFile: Indicates if a file should be writen with the result. If TRUE, writes a file named *tidyDataResult.txt* in the work directory, using the function write.table (uploaded to coursera course evaluation). Defaults to FALSE.
     + Returns the tidy dataset.
 
-As the execution can take time, each method uses the message function to inform the user about the status.
+As execution can take time, each method uses the message function to inform the user about the execution status.
 
 ### Code book
 
