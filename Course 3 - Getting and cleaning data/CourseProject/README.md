@@ -56,5 +56,5 @@ The results return a data frame with 180 observations and 81 variables:
     + LAYING, SITTING, STANDING, WALKING, WALKING_DOWNSTAIRS or WALKING_UPSTAIRS.
 * **Subject**: Subject doing the activities, identified by ID (integer).
 * **Other variables**: The other 79 variables contains the mean of the data collected for the subject in that activity, for the given original variable.
-    + **Refer to the original data about the meaning and units of each variable.** IT's located at **[UCI HAR Dataset/Readme.txt](./UCI%20HAR%20Dataset/Readme.txt)**
+    + **Refer to the original data about the meaning and units of each variable.** IT's located at **[UCI HAR Dataset/README.txt](./UCI%20HAR%20Dataset/README.txt)**
 
