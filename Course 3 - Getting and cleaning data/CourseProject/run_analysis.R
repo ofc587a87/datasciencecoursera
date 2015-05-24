@@ -85,7 +85,7 @@ step5 <- function(data)
 
 
 
-main <- function()
+main <- function(writeFile = FALSE)
 {
   message("Preparing data, please wait...");
   data <- step1();
@@ -94,6 +94,11 @@ main <- function()
   data <-step4(data);
   result <- step5(data);
   
-  message("Writing result to 'tidyDataResult.txt'");
-  write.table(result, "tidyDataResult.txt", append = FALSE, quote = FALSE, col.names = FALSE, row.names = FALSE);
+  if(writeFile)
+  {
+    message("Writing result to 'tidyDataResult.txt'");
+    write.table(result, "tidyDataResult.txt", append = FALSE, quote = FALSE, col.names = FALSE, row.names = FALSE);
+  }
+  
+  result;
 }
