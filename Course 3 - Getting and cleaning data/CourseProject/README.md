@@ -1,5 +1,6 @@
 ---
-  Author: David Luna
+  Author: David Luna Cervero
+  Title: Course 3 - Getting and cleaning data - Course Project
 ---
 # Data Science Specialization
 ## Course 3 - Getting and cleaning data
@@ -28,7 +29,7 @@ The code contains several methods:
 * **step1()**: Merges the training and the test data sets into one data set, with subject and activity data.
     + Does not require parameters
     + Returns the resulting dataset
-* **step2(data)**: Filter out variables from the dataset that are not related to mean or standard deviation, excepting activity and subject variables. It's objtaining from the file *activity_labels.txt*, if the variable name contains the text 'mean(', 'meanFreq(' or 'std('.
+* **step2(data)**: Filter out variables from the dataset that are not related to mean or standard deviation, excepting activity and subject variables. It obtains the variable names from the file *activity_labels.txt*, and analicyng if it contains the text 'mean(', 'meanFreq(' or 'std('.
     + Requires the data set obtained from step1
     + Returns the filtered data set
 * **step3(data)**: Replace the the Activity variable, containing an activity ID, with its corresponding name, provided in the file *activity_labels.txt*. 
@@ -55,5 +56,5 @@ The results return a data frame with 180 observations and 81 variables:
     + LAYING, SITTING, STANDING, WALKING, WALKING_DOWNSTAIRS or WALKING_UPSTAIRS.
 * **Subject**: Subject doing the activities, identified by ID (integer).
 * **Other variables**: The other 79 variables contains the mean of the data collected for the subject in that activity, for the given original variable.
-    + **Refer to the original data about the meaning and units of each variable.**
+    + **Refer to the original data about the meaning and units of each variable.** IT's located at **[UCI HAR Dataset/Readme.txt](./UCI%20HAR%20Dataset/Readme.txt)**
 
