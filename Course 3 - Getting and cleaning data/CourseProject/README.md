@@ -51,9 +51,9 @@ As the execution can take time, each method uses the message function to inform 
 
 The results return a data frame with 180 observations and 81 variables:
 
-* **Activity**: Activity the subject was realizingwhen the data was collected. It's a factor of one of this values:     
+* **Activity**: Activity the subject was realizingwhen the data was collected. It's a factor (String) of one of this values:     
     + LAYING, SITTING, STANDING, WALKING, WALKING_DOWNSTAIRS or WALKING_UPSTAIRS.
-* **Subject**: Subject doing the activities, identified by ID.
+* **Subject**: Subject doing the activities, identified by ID (integer).
 * **Other variables**: The other 79 variables contains the mean of the data collected for the subject in that activity, for the given original variable.
-    + Refer to the data information about the meaning of each variable.
+    + **Refer to the original data about the meaning and units of each variable.**
 
