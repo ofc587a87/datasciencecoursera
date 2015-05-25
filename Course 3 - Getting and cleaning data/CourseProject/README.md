@@ -50,7 +50,7 @@ As execution can take time, each method uses the message function to inform the 
 
 ### Code book
 
-The results return a data frame with 180 observations and 81 variables:
+The results return a data frame with 180 observations and 81 variables. Variable names are listed in order in file **[tidy_variables.txt](./tidy_variables.txt)**
 
 * **Activity**: Activity the subject was realizingwhen the data was collected. It's a factor (String) of one of this values:     
     + LAYING, SITTING, STANDING, WALKING, WALKING_DOWNSTAIRS or WALKING_UPSTAIRS.
