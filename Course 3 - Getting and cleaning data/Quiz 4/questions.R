@@ -17,6 +17,9 @@ question1 <- function()
 }
 
 readGDPData <- function() {
+    
+    message("Reading GDP data... ", appendLF=FALSE);
+    
     # Read data
     data <- read.csv("getdata-data-GDP.csv", skip=5, header = FALSE, stringsAsFactors = FALSE);
     
@@ -24,20 +27,38 @@ readGDPData <- function() {
     data <- data[,c(1,2,4,5)]
     
     #stablish column names
-    names(data) <- c("countryCode", "ranking", "countryName", "GDP")
-    
-    
-    message(paste("Colums:", as.character(paste(names(data), collapse=", "))));
-    message(paste("Rows:", nrow(data)));
-    message(paste("cols:", ncol(data)));
+    names(data) <- list("countryCode", "ranking", "countryName", "GDP")
     
     #sanitize
-    data <- data[   !grepl("(^$)", data[,"countryCode"])
-          & !grepl("(^$)", data[,"ranking"])
-          & !grepl("(\\.)+|(^$)", data[,"GDP"])
+    data <- data[   !grepl("(^$)", data$countryCode)
+          & !grepl("(^$)", data$ranking)
+          & !grepl("(\\.)+|(^$)", data$GDP)
         , ];
     
-    message(paste("Sanitized to ", nrow(data), "rows"));
+    message(paste("Sanitized to", nrow(data), "rows, Done!"));
+    
+    data;
+}
+
+readEDSData <- function() {
+    
+    message("Reading EDS data... ", appendLF=FALSE);
+    
+    # Read data
+    data <- read.csv("getdata-data-EDSTATS_Country.csv", stringsAsFactors = FALSE);
+    
+    # filter columns
+    data <- data[,c(1, 2, 10)]
+    
+    #stablish column names
+    names(data) <- gsub("\\.", "", names(data));
+    
+    #sanitize
+    data <- data[   !grepl("(^$)", data$CountryCode)
+                    & !grepl("(^$)", data$LongName)
+                    , ];
+    
+    message(paste("Sanitized to", nrow(data), "rows, Done!"));
     
     data;
 }
@@ -47,7 +68,7 @@ question2 <- function() {
     data <- readGDPData();
     
     # extract column and replace comas
-    gdp <- as.numeric(gsub(",", "", data[, "GDP"]))
+    gdp <- as.numeric(gsub(",", "", data$GDP))
     
     message(paste("Mean of",length(gdp), "GDP readings is", mean(gdp)));
 }
@@ -57,9 +78,27 @@ question3 <- function() {
     data <- readGDPData();
     
     # filter with nregexp
-    countryNames <- data[grepl("^United", data[,"countryName"]),"countryName"];
+    countryNames <- data$countryName[grepl("^United", data$countryName)];
     
-    message(paste("Filtered from", nrow(data), "to", length(countryNames)))
-    message("Result:")
+    message(paste("Filtered from", nrow(data), "to", length(countryNames), "starting with word 'United'"))
+    message("Result:", appendLF=FALSE)
     message(paste(countryNames, collapse=", "))
+}
+
+question4 <- function() {
+    
+    #read GDP data
+    gdpData <- readGDPData();
+    
+    #read EDS data
+    edsData <- readEDSData();
+    
+    # merge data
+    mergedData <- merge(gdpData, edsData, by.x="countryCode", by.y="CountryCode", all = FALSE);
+    
+    message(paste("Merged data to", nrow(mergedData), "rows"));
+    
+    fiscalData <- mergedData$SpecialNotes[grepl("^Fiscal year end: June", mergedData$SpecialNotes)];
+    
+    message(paste("Fiscal year end in June:", length(fiscalData), "countries"));
 }
