@@ -5,12 +5,43 @@ question1 <- function()
     # Read data
     data <- read.csv("getdata-data-ss06hid.csv");
     
+    #read original names
     vColNames <- colnames(data);
     message(paste("there are", length(vColNames), "columns."))
     message(paste0("The 123th column is named '", vColNames[123], "'"))
     
+    #reaplce and print solution
     modNames <- strsplit(vColNames, split = "wgtp")
+
+    message(paste0("The 123th column is renamed '", modNames[123], "'")) 
+}
+
+question2 <- function() {
     
-    message(paste0("The 123th column is renamed '", modNames[123], "'"))
+    # Read data
+    data <- read.csv("getdata-data-GDP.csv", skip=5, header = FALSE, stringsAsFactors = FALSE);
     
+    # filter columns
+    data <- data[,c(1,2,4,5)]
+    
+    #stablish column names
+    names(data) <- c("countrycode", "ranking", "name", "GDP")
+    
+    
+    message(paste("Colums:", as.character(paste(names(data), collapse=", "))));
+    message(paste("Rows:", nrow(data)));
+    message(paste("cols:", ncol(data)));
+    
+    #sanitize
+    data <- data[   !grepl("(^$)", data[,"countrycode"])
+                   & !grepl("(^$)", data[,"ranking"])
+                   & !grepl("(\\.)+|(^$)", data[,"GDP"])
+                 , ];
+    
+    message(paste("Sanitized to ", nrow(data), "rows"));
+    
+    # Replace comas
+    gdp <- as.numeric(gsub(",", "", data[, "GDP"]))
+    
+    message(paste("Mean of",length(gdp), "GDP readings is", mean(gdp)));
 }
