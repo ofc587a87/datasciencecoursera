@@ -1,4 +1,5 @@
-
+library(quantmod);
+options("getSymbols.warning4.0"=FALSE);
 
 question1 <- function() 
 {
@@ -101,4 +102,25 @@ question4 <- function() {
     fiscalData <- mergedData$SpecialNotes[grepl("^Fiscal year end: June", mergedData$SpecialNotes)];
     
     message(paste("Fiscal year end in June:", length(fiscalData), "countries"));
+}
+
+question5 <- function() {
+    
+    # From question
+    amzn = suppressWarnings(getSymbols("AMZN",auto.assign=FALSE));
+    sampleTimes = index(amzn);
+    
+    # Son objetos tipo Date (dias desde 01/01/1970)
+    
+    #Convertimos a POSIX
+    objDates <- as.POSIXlt(sampleTimes);
+    
+    
+    # How many values were collected in 2012?
+    year2012 <- objDates[objDates$year == (2012 - 1900)];
+    message(paste("Dates in 2012:", length(year2012)));
+    
+    # How many values were collected on Mondays in 2012?
+    monday2012 <- year2012[year2012$wday == 1];
+    message(paste("Mondays in 2012:", length(monday2012)));
 }
