@@ -1,4 +1,5 @@
 
+# read files and extract data
 readFiles <- function() {
     
     NEI <- readRDS("summarySCC_PM25.rds");
@@ -9,6 +10,7 @@ readFiles <- function() {
     list(NEI, SCC);
 }
 
+# read data only at first execution
 if(!exists("NEI", inherits = FALSE) || !exists("SCC", inherits = FALSE)){
     message("Reading data (only at first load)");
     data <- readFiles();
@@ -18,5 +20,5 @@ if(!exists("NEI", inherits = FALSE) || !exists("SCC", inherits = FALSE)){
     message("Done!");
 }
 
-# Specfifies number of decimals to use scientifis format for decimals
+# Specfifies number of decimals to omit scientific format (axis labels)
 options(scipen=5);

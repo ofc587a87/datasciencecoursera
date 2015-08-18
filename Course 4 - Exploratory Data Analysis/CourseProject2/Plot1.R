@@ -40,6 +40,7 @@ createPlot1 <- function(){
     # decorate plot
     title(main="Total emissions from PM2.5 in the United States");
     
+    # closes png device
     dev.off();
     
     message("Image plot1.png generated!");
