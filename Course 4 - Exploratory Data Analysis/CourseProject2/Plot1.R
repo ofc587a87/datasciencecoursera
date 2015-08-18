@@ -26,7 +26,7 @@ createPlot1 <- function(){
     yLimits <- c(min(totalsPerYear[,2]) - yLimitsBias, max(totalsPerYear[,2]) + yLimitsBias)
     
     # Creates device
-    png(filename = "PLot1.png", width = 600, height = 480);
+    png(filename = "Plot1.png", width = 600, height = 480);
     
     # plot the data without lower axis
     plot(totalsPerYear, type="o", xlim=xLimits, ylim=yLimits, xaxt="n");
