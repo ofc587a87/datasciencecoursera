@@ -22,21 +22,18 @@ createPlot2 <- function(){
             totalsPerYear <- rbind(totalsPerYear, c(y, s));
         }
     }
-    
-    # automatic limits to fits text
-    xLimitsBias=(max(totalsPerYear[,1]) - min(totalsPerYear[,1])) / 20;
-    xLimits <- c(min(totalsPerYear[,1]) - xLimitsBias, max(totalsPerYear[,1]) + xLimitsBias)
-    
-    yLimitsBias=(max(totalsPerYear[,2]) - min(totalsPerYear[,2])) / 20;
-    yLimits <- c(min(totalsPerYear[,2]) - yLimitsBias, max(totalsPerYear[,2]) + yLimitsBias)
-    
+        
     # Creates device
     png(filename = "Plot2.png", width = 600, height = 480);
+    
+    #calculate limits fr axis, leaving space for text labels
+    xLimits <- calcLimits(totalsPerYear[,1]);
+    yLimits <- calcLimits(totalsPerYear[,2]);
     
     # plot the data without lower axis
     plot(totalsPerYear, type="o", xlim=xLimits, ylim=yLimits, xaxt="n");
     
-    # add lower axis with all ytears detailed
+    # add lower axis with all years
     axis(side=1, round(xLimits[1]):round(xLimits[2]));
     
     # add text data to each point

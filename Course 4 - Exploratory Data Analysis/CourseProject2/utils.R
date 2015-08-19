@@ -10,6 +10,13 @@ readFiles <- function() {
     list(NEI, SCC);
 }
 
+# calc limits for axis, with extra space for text labels
+calcLimits <- function(vect) {
+    limitsBias <- (max(vect) - min(vect)) / 20;
+    limits <- c(min(vect) - limitsBias, max(vect) + limitsBias);
+    limits;
+}
+
 # read data only at first execution
 if(!exists("NEI", inherits = FALSE) || !exists("SCC", inherits = FALSE)){
     message("Reading data (only at first load)");
@@ -20,5 +27,5 @@ if(!exists("NEI", inherits = FALSE) || !exists("SCC", inherits = FALSE)){
     message("Done!");
 }
 
-# Specfifies number of decimals to omit scientific format (axis labels)
+# Specifies number of decimals to omit scientific format (axis labels)
 options(scipen=5);
