@@ -18,7 +18,7 @@ createPlot1 <- function(){
         }
     }
     
-    # automaticis limits to fits text
+    # automatic limits to fits text
     xLimitsBias=(max(totalsPerYear[,1]) - min(totalsPerYear[,1])) / 20;
     xLimits <- c(min(totalsPerYear[,1]) - xLimitsBias, max(totalsPerYear[,1]) + xLimitsBias)
 
