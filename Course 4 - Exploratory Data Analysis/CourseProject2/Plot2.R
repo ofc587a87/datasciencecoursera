@@ -13,7 +13,7 @@ createPlot2 <- function(){
     
     ###### SAME CODE AS createPlot1, but using baltimoreData #######
     
-    # creates a new dataset with the totals per year
+    # creates a matrix  with the totals per year
     totalsPerYear <- matrix(dimnames = list(NULL, c("Years", "Emissions")), ncol = 2, nrow = 0);
     
     for(y in min(baltimoreData$year):max(baltimoreData$year)) {

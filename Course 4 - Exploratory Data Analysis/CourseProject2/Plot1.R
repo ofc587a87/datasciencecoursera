@@ -8,7 +8,7 @@ createPlot1 <- function(){
     
     data <- NEI[[1]];
     
-    # creates a new dataset with the totals per year
+    # creates a matrix with the totals per year
     totalsPerYear <- matrix(dimnames = list(NULL, c("Years", "Emissions")), ncol = 2, nrow = 0);
     
     for(y in min(data$year):max(data$year)) {

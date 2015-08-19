@@ -1,9 +1,11 @@
 
 # read files and extract data
 readFiles <- function() {
-    
+    #read NEI data and transform factors
     NEI <- readRDS("summarySCC_PM25.rds");
     message("NEI file readed");
+    
+    #read SCC data
     SCC <- readRDS("Source_Classification_Code.rds");
     message("SCC file readed");
     
