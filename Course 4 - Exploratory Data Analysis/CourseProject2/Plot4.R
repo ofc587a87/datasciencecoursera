@@ -8,13 +8,13 @@ source("utils.R");
 
 createPlot4 <- function() {
     
-    #get coal related sources
+    #get coal related sources (indicated in Short Name)
     sccData <- SCC[[1]];
     coalSCC <- sccData$SCC[grepl("coal", sccData$Short.Name, ignore.case = TRUE)];
 
-    #get data and filter by those using coal source
+    #get data and subset those using coal source
     data <- NEI[[1]];
-    data <- data[data$SCC %in% coalSCC,];
+    data <- subset(data, SCC %in% coalSCC);
 
     #create summarized data frame
     df = data.frame();
