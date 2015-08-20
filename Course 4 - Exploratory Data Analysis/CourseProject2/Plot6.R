@@ -18,7 +18,7 @@ createPlot6 <- function() {
     #get data 
     data <- NEI[[1]];
     
-    #subset data for Baltimore city and LosAngeles Cunty and those using motor vehicle source
+    #subset data for Baltimore city and LosAngeles County and those using motor vehicle source
     data <- subset(data, fips %in% c("24510", "06037") & SCC %in% motorSCC);
     
     #location labels
